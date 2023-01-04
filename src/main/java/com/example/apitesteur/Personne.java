@@ -1,21 +1,21 @@
 package com.example.apitesteur;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Component
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ville {
+@Entity
+public class Personne {
 
+    @Id
     private String nom;
-    private String pays;
-
-
-    public void test(){
-        System.out.println("je suis une ville");
-
-    }
+    private String prenom;
 }

@@ -1,9 +1,12 @@
 package com.example.apitesteur;
 
 
+import com.example.apitesteur.aspect.LogResponseTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -13,16 +16,20 @@ import java.util.concurrent.CompletableFuture;
 public class PepiteService {
 
     private final PepiteRepository pepiteRepository;
+    private final PersonneRepository personneRepository;
 
-    public PepiteService(PepiteRepository pepiteRepository) {
+    public PepiteService(PepiteRepository pepiteRepository, PersonneRepository personneRepository) {
         this.pepiteRepository = pepiteRepository;
+        this.personneRepository = personneRepository;
     }
 
-    public List<Pepite> getAllPepites() {
+
+    @LogResponseTime("getAllPepites")
+    public List<Personne> getAllPepites() {
 
 
         log.info("appel depuis le script de test de performances");
-        return pepiteRepository.findAll();
+        return personneRepository.findAll();
     }
 
     public synchronized void createPepite(Pepite pepite) {
